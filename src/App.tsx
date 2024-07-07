@@ -1,12 +1,10 @@
 import { ChangeEvent, Component, ReactNode } from 'react'
 import './App.css'
+import { BASE_URL_CHARACTER, searchKey } from './constants'
+import DisplayData from './DisplayData'
+import ErrorBoundary from './ErrrorBoundary'
 import Search from './Search'
-import {
-  BASE_URL_CHARACTER,
-  DataResults,
-  searchKey,
-  searchStorage,
-} from './constants'
+import { DataResults } from './types'
 
 type StateType = {
   searchValue: string
@@ -15,13 +13,11 @@ type StateType = {
 
 export default class App extends Component {
   state: StateType = {
-    searchValue: searchStorage,
+    searchValue: localStorage.getItem(searchKey) ?? '',
     data: [],
   }
 
   handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    localStorage.setItem(searchKey, e.target.value)
-
     this.setState({
       searchValue: e.target.value,
     })
@@ -41,6 +37,9 @@ export default class App extends Component {
       this.setState({
         data: firstTenResults,
       })
+      if (firstTenResults) {
+        localStorage.setItem(searchKey, this.state.searchValue)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -55,8 +54,6 @@ export default class App extends Component {
   }
 
   render(): ReactNode {
-    console.log(this.state.data)
-
     return (
       <>
         <div className="top container">
@@ -67,25 +64,9 @@ export default class App extends Component {
             handleSearchClick={this.handleSearchClick}
           />
         </div>
-        <div className="bottom container">
-          {!this.state.data ? (
-            <h2>No Items</h2>
-          ) : (
-            this.state.data?.map((character) => (
-              <ul key={character.id} className="card">
-                <li className="card-item">{character.name}</li>
-                <li className="card-item">{character.gender} - Gender</li>
-                <li className="card-item">{character.status} - Is Alive</li>
-                <li className="card-item">
-                  {character.location.name} - Location
-                </li>
-                <li className="card-item">
-                  <img src={character.image} alt={character.name} />
-                </li>
-              </ul>
-            ))
-          )}
-        </div>
+        <ErrorBoundary>
+          <DisplayData data={this.state.data} />
+        </ErrorBoundary>
       </>
     )
   }
