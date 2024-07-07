@@ -1,15 +1,24 @@
-import { Component, ReactNode } from 'react'
+import { ChangeEvent, Component, ReactNode } from 'react'
 
-export default class Search extends Component {
+type Props = {
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleSearchClick: () => void
+}
+
+export default class Search extends Component<Props> {
   render(): ReactNode {
     return (
       <div>
         <input
           className="search"
           type="search"
-          placeholder="Type search value"
+          value={this.props.value}
+          onChange={this.props.onChange}
         />
-        <button>Search</button>
+        <button className="searchButton" onClick={this.props.handleSearchClick}>
+          Search
+        </button>
       </div>
     )
   }
