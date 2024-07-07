@@ -9,12 +9,14 @@ import { DataResults } from './types'
 type StateType = {
   searchValue: string
   data: DataResults[] | undefined
+  isLoading: boolean
 }
 
 export default class App extends Component {
   state: StateType = {
     searchValue: localStorage.getItem(searchKey) ?? '',
     data: [],
+    isLoading: false,
   }
 
   handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +27,9 @@ export default class App extends Component {
 
   fetchData = async () => {
     try {
+      this.setState({
+        isLoading: true,
+      })
       const response = await fetch(
         `${BASE_URL_CHARACTER}/?name=${this.state.searchValue}`
       )
@@ -36,6 +41,9 @@ export default class App extends Component {
           : data?.results
       this.setState({
         data: firstTenResults,
+      })
+      this.setState({
+        isLoading: false,
       })
       if (firstTenResults) {
         localStorage.setItem(searchKey, this.state.searchValue)
@@ -65,7 +73,10 @@ export default class App extends Component {
           />
         </div>
         <ErrorBoundary>
-          <DisplayData data={this.state.data} />
+          <DisplayData
+            data={this.state.data}
+            isLoading={this.state.isLoading}
+          />
         </ErrorBoundary>
       </>
     )
