@@ -64,6 +64,11 @@
   }
 }
 
+.errorButton {
+  display: block;
+  margin: 10px auto;
+}
+
 .bottom {
   display: flex;
   flex-wrap: wrap;
