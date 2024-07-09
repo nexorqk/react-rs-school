@@ -1,0 +1,20 @@
+.search {
+  height: 30px;
+  font-size: 1rem;
+  margin-right: 15px;
+}
+
+.searchButton {
+  background-color: transparent;
+  border: 1px solid black;
+  font-size: 1rem;
+  line-height: 1.1;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: rgb(207, 205, 205);
+}

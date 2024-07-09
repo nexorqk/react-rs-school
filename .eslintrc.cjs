@@ -17,6 +17,5 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react-compiler/react-compiler': 'error',
-    'prettier/prettier': 'warn',
   },
 }
