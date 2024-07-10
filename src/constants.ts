@@ -6,4 +6,7 @@ export const API = {
 
 export const BASE_URL_CHARACTER = API.characters
 
-export const searchKey = 'searchInput'
+const searchKey = 'searchInput'
+export const getLSSearch = localStorage.getItem(searchKey)
+export const setLSSearch = (searchValue: string) =>
+  localStorage.setItem(searchKey, searchValue)

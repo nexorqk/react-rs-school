@@ -1,10 +1,15 @@
+import clsx from 'clsx'
 import { Component, ErrorInfo, ReactNode } from 'react'
+import classes from './ErrorBoundary.module.css'
 
 type PropsType = {
   children: ReactNode
 }
 
-type StateType = { error: Error | null; errorInfo: ErrorInfo | null }
+type StateType = {
+  error: Error | null
+  errorInfo: ErrorInfo | null
+}
 
 export default class ErrorBoundary extends Component<PropsType, StateType> {
   constructor(props: PropsType) {
@@ -19,16 +24,29 @@ export default class ErrorBoundary extends Component<PropsType, StateType> {
     })
   }
 
+  handleReset = () => {
+    this.setState({
+      errorInfo: null,
+    })
+  }
+
   render() {
     if (this.state.errorInfo) {
       return (
-        <div className="container">
+        <div className={clsx('container', classes.error)}>
           <h2>Something went wrong.</h2>
-          <details style={{ whiteSpace: 'pre-wrap' }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
+          <div className={classes.details}>
+            <p className={classes.bold}>
+              {this.state.error && this.state.error.toString()}
+            </p>
             {this.state.errorInfo.componentStack}
-          </details>
+          </div>
+          <button
+            className={classes.resetBtn}
+            onClick={() => this.handleReset()}
+          >
+            Reload page
+          </button>
         </div>
       )
     }

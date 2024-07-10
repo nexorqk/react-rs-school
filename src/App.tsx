@@ -1,47 +1,50 @@
 import clsx from 'clsx'
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 import classes from './App.module.css'
 import DisplayData from './components/display-data/DisplayData'
 import Search from './components/search/Search'
-import { BASE_URL_CHARACTER, searchKey } from './constants'
+import { BASE_URL_CHARACTER, getLSSearch, setLSSearch } from './constants'
 import { DataResults } from './types'
 
 export default function App() {
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem(searchKey) ?? ''
-  )
-  const [data, setData] = useState<DataResults[] | undefined>()
+  const [searchValue, setSearchValue] = useState(getLSSearch || '')
+  const [searchQuery, setSearchQuery] = useState(getLSSearch || '')
+  const [data, setData] = useState<DataResults[] | undefined>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
-  }
+  const getFetchUrl = useCallback((query: string) => {
+    return `${BASE_URL_CHARACTER}/?name=${query}`
+  }, [])
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async (searchQuery: string) => {
     try {
       setIsLoading(true)
-      const response = await fetch(`${BASE_URL_CHARACTER}/?name=${searchValue}`)
+      const response = await fetch(getFetchUrl(searchQuery))
       const data = await response.json()
       const firstTenResults: DataResults[] =
-        data?.results && data?.results.length > 10
-          ? data?.results.slice(10)
-          : data?.results
+        data?.results && data.results.length > 10
+          ? data.results.slice(0, 10)
+          : data.results
       setData(firstTenResults)
       setIsLoading(false)
-      if (firstTenResults) {
-        localStorage.setItem(searchKey, searchValue)
-      }
     } catch (error) {
       console.error(error)
     }
-  }, [searchValue])
+  }
 
   useEffect(() => {
-    fetchData()
-  }, [fetchData])
+    try {
+      setLSSearch(searchValue)
+      fetchData(searchQuery)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [searchQuery])
 
-  const handleSearchClick = () => {
-    fetchData()
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSearchQuery(searchValue)
+    fetchData(searchQuery)
   }
 
   return (
@@ -50,8 +53,8 @@ export default function App() {
         <h1>Rick And Morty Characters</h1>
         <Search
           value={searchValue}
-          onChange={handleChangeSearch}
-          handleSearchClick={handleSearchClick}
+          setSearchValue={setSearchValue}
+          handleSearchSubmit={handleSearchSubmit}
         />
       </div>
       <DisplayData data={data} isLoading={isLoading} />

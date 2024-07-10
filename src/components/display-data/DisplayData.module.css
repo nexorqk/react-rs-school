@@ -1,13 +1,12 @@
-.errorButton {
-  display: block;
-  margin: 10px auto;
-}
-
 .bottom {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+}
+
+.loaderWrapper {
+  width: 100%;
 }
 
 .card {
