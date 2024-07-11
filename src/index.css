@@ -7,6 +7,14 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  color: #065da8;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1200px;
   padding: 20px;

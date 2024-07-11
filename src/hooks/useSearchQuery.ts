@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useSearchQuery = () => {
+export default function useSearchQuery() {
   const [lsSearch, setLSSearch] = useState(
     localStorage.getItem('searchInput') || ''
   )
@@ -14,5 +14,3 @@ const useSearchQuery = () => {
     setLSSearch,
   }
 }
-
-export default useSearchQuery
