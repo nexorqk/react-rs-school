@@ -4,9 +4,8 @@ export const API = {
   episodes: 'https://rickandmortyapi.com/api/episode',
 }
 
-export const BASE_URL_CHARACTER = API.characters
+const BASE_URL_CHARACTER = API.characters
 
-const searchKey = 'searchInput'
-export const getLSSearch = localStorage.getItem(searchKey)
-export const setLSSearch = (searchValue: string) =>
-  localStorage.setItem(searchKey, searchValue)
+export const getFetchUrl = (query: string) => {
+  return `${BASE_URL_CHARACTER}/?name=${query}`
+}
