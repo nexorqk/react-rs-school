@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { Component, ErrorInfo, ReactNode } from 'react'
 import classes from './ErrorBoundary.module.css'
 
@@ -33,7 +32,7 @@ export default class ErrorBoundary extends Component<PropsType, StateType> {
   render() {
     if (this.state.errorInfo) {
       return (
-        <div className={clsx('container', classes.error)}>
+        <div className={classes.error}>
           <h2>Something went wrong.</h2>
           <div className={classes.details}>
             <p className={classes.bold}>

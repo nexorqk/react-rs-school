@@ -18,6 +18,5 @@ module.exports = {
     ],
     'react-compiler/react-compiler': 'error',
     'react-hooks/exhaustive-deps': 'off',
-    'prettier/prettier': 'warn',
   },
 }

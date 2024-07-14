@@ -1,6 +1,6 @@
-import clsx from 'clsx'
 import { FormEvent, useEffect, useState } from 'react'
 import DisplayData from '../../components/display-data/DisplayData'
+import Pagination from '../../components/pagination/Pagination'
 import Search from '../../components/search/Search'
 import { getFetchUrl } from '../../constants'
 import useSearchQuery from '../../hooks/useSearchQuery'
@@ -10,20 +10,20 @@ import classes from './Home.module.css'
 export default function Home() {
   const { lsSearch, setLSSearch } = useSearchQuery()
   const [searchValue, setSearchValue] = useState(lsSearch)
-  const [data, setData] = useState<DataResults[] | undefined>([])
+  const [data, setData] = useState<DataResults[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [pages, setPages] = useState(1)
 
   const fetchData = async (searchQuery: string) => {
     try {
       setIsLoading(true)
       const response = await fetch(getFetchUrl(searchQuery))
       const data = await response.json()
-      const firstTenResults: DataResults[] =
-        data?.results && data.results.length > 10
-          ? data.results.slice(0, 10)
-          : data.results
-      setData(firstTenResults)
-      if (firstTenResults) {
+      const dataResult: DataResults[] = data?.results && data.results
+      console.log(data)
+      setPages(data.info.pages)
+      setData(dataResult)
+      if (dataResult) {
         setLSSearch(searchValue)
       }
       setIsLoading(false)
@@ -43,8 +43,8 @@ export default function Home() {
 
   return (
     <>
-      <div className={clsx(classes.top, 'container')}>
-        <h1>Rick And Morty Characters</h1>
+      <div className={classes.top}>
+        <h1 className={classes.title}>Rick And Morty Characters</h1>
         <Search
           value={searchValue}
           setSearchValue={setSearchValue}
@@ -52,6 +52,7 @@ export default function Home() {
         />
       </div>
       <DisplayData data={data} isLoading={isLoading} />
+      {!isLoading && !!data && <Pagination pages={pages} />}
     </>
   )
 }

@@ -1,31 +1,11 @@
-.bottom {
+.wrapper {
+  padding: 20px;
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
 }
 
 .loaderWrapper {
   width: 100%;
-}
-
-.card {
-  list-style: none;
-  margin: 0;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 460px;
-  max-width: 342px;
-  box-shadow:
-    rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  transition: background-color 0.3s ease;
-}
-
-.card:hover {
-  background-color: rgba(0, 0, 0, 0.06);
 }

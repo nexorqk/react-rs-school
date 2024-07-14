@@ -1,33 +1,25 @@
-import clsx from 'clsx'
-import Loader from '../loader/Loader'
 import type { DataResults } from '../../types'
+import Card from '../card/Card'
+import Loader from '../loader/Loader'
 import classes from './DisplayData.module.css'
 
 export default function DisplayData({
   data,
   isLoading,
 }: {
-  data: DataResults[] | undefined
+  data: DataResults[]
   isLoading: boolean
 }) {
-  if (!data) {
-    throw new Error('Error Display Data')
-  }
-
   return (
-    <div className={clsx(classes.bottom, 'container')}>
+    <div className={classes.wrapper}>
       <div className={classes.loaderWrapper}>{isLoading && <Loader />}</div>
-      {data?.map((character) => (
-        <ul key={character.id} className={classes.card}>
-          <li>{character.name}</li>
-          <li>{character.gender} - Gender</li>
-          <li>{character.status} - Is Alive</li>
-          <li>{character.location.name} - Location</li>
-          <li>
-            <img src={character.image} alt={character.name} />
-          </li>
-        </ul>
-      ))}
+      {data?.length > 0 ? (
+        data?.map((character) => (
+          <Card key={character.id} character={character} />
+        ))
+      ) : (
+        <h1>No Data</h1>
+      )}
     </div>
   )
 }

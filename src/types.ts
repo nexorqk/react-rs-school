@@ -1,3 +1,13 @@
+export type DataType = {
+  info: {
+    count: number
+    next: string
+    pages: number
+    prev: string | null
+  }
+  results: DataResults[]
+}
+
 export type DataResults = {
   created: string
   episode: string[]
