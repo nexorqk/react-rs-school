@@ -1,0 +1,10 @@
+.top {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+}
