@@ -13,10 +13,20 @@
     rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
   background-color: rgba(0, 0, 0, 0.06);
+}
+
+.card:active {
+  background-color: rgba(0, 0, 0, 0.26);
+}
+
+.name {
+  margin: 0;
+  font-size: 1rem;
 }
 
 .imageItem {

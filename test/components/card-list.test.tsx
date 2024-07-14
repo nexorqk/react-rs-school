@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest'
 import DisplayData from '../../src/components/display-data/DisplayData'
 
 describe('Card List', () => {
-  it('Verify that the component renders the specified number of cards', () => {
-    const arr = new Array(10).fill({
+  it('Component renders specified number of cards', () => {
+    const arr = new Array(20).fill({
       created: '-',
       episode: ['1'],
       gender: 'Male',
@@ -23,7 +23,7 @@ describe('Card List', () => {
     render(<DisplayData data={mockData} isLoading={false} />)
 
     const cards = screen.getAllByRole('list')
-    expect(cards.length).toBe(10)
+    expect(cards.length).toBe(20)
   }),
     it('Components should render "No Data" text message on no empty cards array', () => {
       render(<DisplayData data={[]} isLoading={false} />)

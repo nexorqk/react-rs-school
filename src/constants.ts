@@ -4,7 +4,7 @@ export const API = {
   episodes: 'https://rickandmortyapi.com/api/episode',
 }
 
-const BASE_URL_CHARACTER = API.characters
+export const BASE_URL_CHARACTER = API.characters
 
 export const getFetchUrl = (query: string) => {
   return `${BASE_URL_CHARACTER}/?name=${query}`
