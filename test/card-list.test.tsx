@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import DisplayData from '../../src/components/display-data/DisplayData'
+import DisplayData from '../src/components/display-data/DisplayData'
+import { DataResults } from '../src/types'
 
 describe('Card List', () => {
   it('Component renders specified number of cards', () => {
@@ -18,15 +19,27 @@ describe('Card List', () => {
       id: 1,
       name: 'Rick Sanchez',
     })
-    const mockData = arr.map((item, index) => ({ ...item, id: index + 1 }))
+    const resultData: DataResults[] = arr.map((item, index) => ({
+      ...item,
+      id: index + 1,
+    }))
+    const mockData = {
+      info: {
+        count: 1,
+        next: 'link',
+        pages: 1,
+        prev: null,
+      },
+      results: resultData,
+    }
 
     render(<DisplayData data={mockData} isLoading={false} />)
 
     const cards = screen.getAllByRole('list')
     expect(cards.length).toBe(20)
   }),
-    it('Components should render "No Data" text message on no empty cards array', () => {
-      render(<DisplayData data={[]} isLoading={false} />)
+    it('Components should render "No Data" text message on empty cards array', () => {
+      render(<DisplayData data={undefined} isLoading={false} />)
 
       const text = screen.getByText('No Data')
       expect(text).toBeInTheDocument()

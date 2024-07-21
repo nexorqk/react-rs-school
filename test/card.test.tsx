@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { expect, it } from 'vitest'
-import Card from '../../src/components/card/Card'
+import Card from '../src/components/card/Card'
 
 it('Card component renders the relevant card data', () => {
   const mockData = {

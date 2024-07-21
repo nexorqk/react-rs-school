@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { DataResults } from '../../types'
+import type { DataType } from '../../types'
 import Card from '../card/Card'
 import Loader from '../loader/Loader'
 import classes from './DisplayData.module.css'
@@ -9,7 +9,7 @@ export default function DisplayData({
   data,
   isLoading,
 }: {
-  data: DataResults[]
+  data: DataType | undefined
   isLoading: boolean
 }) {
   const [detailedId, setDetailId] = useState<number | null>(null)
@@ -22,8 +22,8 @@ export default function DisplayData({
     <div className={classes.wrapper}>
       <div className={classes.cardList}>
         <div className={classes.loaderWrapper}>{isLoading && <Loader />}</div>
-        {data?.length > 0 ? (
-          data?.map((character) => (
+        {data?.results && data.results.length > 0 ? (
+          data.results.map((character) => (
             <Card
               key={character.id}
               handleCardClick={handleCardClick}

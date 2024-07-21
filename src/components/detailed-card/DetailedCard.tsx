@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { BASE_URL_CHARACTER } from '../../constants'
 import { DataResults } from '../../types'
 import Loader from '../loader/Loader'
 import classes from './DetailedCard.module.css'
+import { API } from '../../constants'
 
 export default function DetailedCard({
   detailedId,
@@ -14,8 +14,7 @@ export default function DetailedCard({
   const fetchData = async (id: number) => {
     try {
       setIsLoading(true)
-      setData(null)
-      const response = await fetch(`${BASE_URL_CHARACTER}/${id}`)
+      const response = await fetch(`${API.characters}/${id}`)
       const data = await response.json()
       setData(data)
       setIsLoading(false)
@@ -29,8 +28,6 @@ export default function DetailedCard({
       fetchData(detailedId)
     }
   }, [detailedId])
-
-  console.log(data)
 
   return (
     <div className={classes.wrapper}>
