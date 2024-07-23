@@ -1,0 +1,20 @@
+.wrapper.dark {
+  background-color: rgb(43, 42, 42);
+  color: white;
+}
+
+.top {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+}
+
+.toggleTheme {
+  padding: 4px;
+  cursor: pointer;
+}

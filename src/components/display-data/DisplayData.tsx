@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import type { DataType } from '../../types'
+import { charactersApi } from '../../services/characters'
 import Card from '../card/Card'
+import DetailedCard from '../detailed-card/DetailedCard'
 import Loader from '../loader/Loader'
 import classes from './DisplayData.module.css'
-import DetailedCard from '../detailed-card/DetailedCard'
 
-export default function DisplayData({
-  data,
-  isLoading,
-}: {
-  data: DataType | undefined
-  isLoading: boolean
-}) {
+export default function DisplayData() {
+  const { data, error, isLoading, isFetching, refetch } =
+    charactersApi.useGetCharacterByNameQuery('')
+
   const [detailedId, setDetailId] = useState<number | null>(null)
 
   const handleCardClick = (id: number) => {
@@ -22,7 +19,11 @@ export default function DisplayData({
     <div className={classes.wrapper}>
       <div className={classes.cardList}>
         <div className={classes.loaderWrapper}>{isLoading && <Loader />}</div>
-        {data?.results && data.results.length > 0 ? (
+        {error ? (
+          <>Oh no, there was an error</>
+        ) : isLoading ? (
+          <>Loading...</>
+        ) : data?.results && data.results.length > 0 ? (
           data.results.map((character) => (
             <Card
               key={character.id}
@@ -34,6 +35,9 @@ export default function DisplayData({
           <h1>No Data</h1>
         )}
       </div>
+      <button onClick={refetch} disabled={isFetching}>
+        {isFetching ? 'Fetching...' : 'Refetch'}
+      </button>
       <DetailedCard detailedId={detailedId} />
     </div>
   )
