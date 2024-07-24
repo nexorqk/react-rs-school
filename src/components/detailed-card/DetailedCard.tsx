@@ -1,33 +1,14 @@
-import { useEffect, useState } from 'react'
-import { DataResults } from '../../types'
 import Loader from '../loader/Loader'
 import classes from './DetailedCard.module.css'
-import { API } from '../../constants'
+import { charactersApi } from '../../app/services/characters'
 
-export default function DetailedCard({
-  detailedId,
-}: {
-  detailedId: number | null
-}) {
-  const [data, setData] = useState<DataResults | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const fetchData = async (id: number) => {
-    try {
-      setIsLoading(true)
-      const response = await fetch(`${API.characters}/${id}`)
-      const data = await response.json()
-      setData(data)
-      setIsLoading(false)
-    } catch (error) {
-      console.error(error)
-    }
+export default function DetailedCard({ detailedId }: { detailedId: string }) {
+  const { data, error, isLoading } =
+    charactersApi.useGetCharacterByIdQuery(detailedId)
+
+  if (error) {
+    throw new Error('No Detailed Data')
   }
-
-  useEffect(() => {
-    if (detailedId) {
-      fetchData(detailedId)
-    }
-  }, [detailedId])
 
   return (
     <div className={classes.wrapper}>

@@ -1,17 +1,20 @@
 import { useState } from 'react'
-import { charactersApi } from '../../services/characters'
+import { useAppSelector } from '../../app/hooks'
+import { charactersApi } from '../../app/services/characters'
 import Card from '../card/Card'
 import DetailedCard from '../detailed-card/DetailedCard'
 import Loader from '../loader/Loader'
 import classes from './DisplayData.module.css'
 
 export default function DisplayData() {
+  const searchState = useAppSelector((state) => state.search)
+
   const { data, error, isLoading, isFetching, refetch } =
-    charactersApi.useGetCharacterByNameQuery('')
+    charactersApi.useGetCharactersByNameQuery(searchState.value)
 
-  const [detailedId, setDetailId] = useState<number | null>(null)
+  const [detailedId, setDetailId] = useState('')
 
-  const handleCardClick = (id: number) => {
+  const handleCardClick = (id: string) => {
     setDetailId(id)
   }
 
@@ -38,7 +41,7 @@ export default function DisplayData() {
       <button onClick={refetch} disabled={isFetching}>
         {isFetching ? 'Fetching...' : 'Refetch'}
       </button>
-      <DetailedCard detailedId={detailedId} />
+      {detailedId && <DetailedCard detailedId={detailedId} />}
     </div>
   )
 }

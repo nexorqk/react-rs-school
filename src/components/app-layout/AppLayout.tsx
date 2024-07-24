@@ -1,20 +1,22 @@
 import clsx from 'clsx'
 import { createContext, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Search from '../../components/search/Search'
-import useSearchQuery from '../../hooks/useSearchQuery'
+import { setSearch } from '../../features/search/searchslice'
 import classes from './AppLayout.module.css'
 
 export const ThemeContext = createContext('light')
 
 export default function AppLayout() {
+  const dispatch = useAppDispatch()
+  const searchState = useAppSelector((state) => state.search)
   const [theme, setTheme] = useState('light')
-  const { lsSearch, setLSSearch } = useSearchQuery()
-  const [searchValue, setSearchValue] = useState(lsSearch)
+  const [searchValue, setSearchValue] = useState(searchState.value)
 
   useEffect(() => {
-    setLSSearch(searchValue)
-  }, [searchValue, setLSSearch])
+    dispatch(setSearch(searchValue))
+  }, [dispatch, searchValue])
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -22,6 +24,7 @@ export default function AppLayout() {
         <div className={classes.top}>
           <h1 className={classes.title}>Rick And Morty Characters</h1>
           <Search value={searchValue} setSearchValue={setSearchValue} />
+
           <button
             className={classes.toggleTheme}
             onClick={() =>
