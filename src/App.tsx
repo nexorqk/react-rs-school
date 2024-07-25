@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import Home from './views/home/Home'
-import NotFound from './views/not-found/NotFound'
-import AppLayout from './components/app-layout/AppLayout'
+import { AppLayout } from './components/app-layout/AppLayout'
+import { Home } from './pages/home/Home'
+import { NotFound } from './pages/not-found/NotFound'
 
-export default function App() {
+export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>

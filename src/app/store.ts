@@ -1,24 +1,28 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import type { Action, ThunkAction } from '@reduxjs/toolkit'
+import { combineSlices, configureStore } from '@reduxjs/toolkit'
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { charactersApi } from './services/characters'
-import { selectedItemsReducer } from '../features/selected-items/selectedItemsSlice'
-import { searchReducer } from '../features/search/searchslice'
+import { setupListeners } from '@reduxjs/toolkit/query'
+import { counterSlice } from '../features/counter/counterSlice'
+import { quotesApiSlice } from '../features/quotes/quotesApiSlice'
+import { searchSlice } from '../features/search/searchSlice'
+import { charactersApiSlice } from '../features/characters/charactersApiSlice'
 
-const rootReducer = combineReducers({
-  [charactersApi.reducerPath]: charactersApi.reducer,
-  selectedItem: selectedItemsReducer,
-  search: searchReducer,
-})
+const rootReducer = combineSlices(
+  counterSlice,
+  quotesApiSlice,
+  searchSlice,
+  charactersApiSlice
+)
 
 const persistConfig = {
   key: 'root',
@@ -28,17 +32,33 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(charactersApi.middleware),
-})
+export type RootState = ReturnType<typeof persistedReducer>
+
+export const makeStore = (preloadedState?: Partial<RootState>) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => {
+      return getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(charactersApiSlice.middleware)
+    },
+    preloadedState,
+  })
+  setupListeners(store.dispatch)
+  return store
+}
+
+export const store = makeStore()
 
 export const persistor = persistStore(store)
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type AppStore = typeof store
+export type AppDispatch = AppStore['dispatch']
+export type AppThunk<ThunkReturnType = void> = ThunkAction<
+  ThunkReturnType,
+  RootState,
+  unknown,
+  Action
+>

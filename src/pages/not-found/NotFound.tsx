@@ -1,6 +1,6 @@
 import classes from './NotFound.module.css'
 
-export default function NotFound() {
+export const NotFound = () => {
   return (
     <div className={classes.container}>
       <a href="/">Home</a>

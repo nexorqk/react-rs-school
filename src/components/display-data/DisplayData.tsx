@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { useAppSelector } from '../../app/hooks'
-import { charactersApi } from '../../app/services/characters'
-import Card from '../card/Card'
-import DetailedCard from '../detailed-card/DetailedCard'
+import { Card } from '../card/Card'
+import { DetailedCard } from '../detailed-card/DetailedCard'
 import Loader from '../loader/Loader'
 import classes from './DisplayData.module.css'
+import { useGetCharactersByNameQuery } from '../../features/characters/charactersApiSlice'
 
-export default function DisplayData() {
+export const DisplayData = () => {
   const searchState = useAppSelector((state) => state.search)
 
   const { data, error, isLoading, isFetching, refetch } =
-    charactersApi.useGetCharactersByNameQuery(searchState.value)
+    useGetCharactersByNameQuery(searchState.value)
 
   const [detailedId, setDetailId] = useState('')
 

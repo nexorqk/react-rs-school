@@ -1,23 +1,27 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { PersistGate } from 'redux-persist/integration/react'
-import App from './App.tsx'
-import { persistor, store } from './app/store.ts'
-import ErrorBoundary from './components/error-boundary/ErrrorBoundary.tsx'
+import { App } from './App'
+import { store } from './app/store'
 import './index.css'
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ErrorBoundary>
+const container = document.getElementById('root')
+
+if (container) {
+  const root = createRoot(container)
+
+  root.render(
+    <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <App />
-          </PersistGate>
+          <App />
         </Provider>
       </BrowserRouter>
-    </ErrorBoundary>
-  </React.StrictMode>
-)
+    </React.StrictMode>
+  )
+} else {
+  throw new Error(
+    "Root element with ID 'root' was not found in the document. Ensure there is a corresponding HTML element with the ID 'root' in your HTML file."
+  )
+}

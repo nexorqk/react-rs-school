@@ -1,16 +1,23 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API } from '../../constants'
+
 import { DataResults, DataType } from '../../types'
 
-export const charactersApi = createApi({
+export const charactersApiSlice = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://rickandmortyapi.com/api/character',
+  }),
   reducerPath: 'charactersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API.characters }),
+  tagTypes: ['Characters'],
   endpoints: (build) => ({
     getCharactersByName: build.query<DataType, string>({
       query: (name) => `/?name=${name}`,
     }),
     getCharacterById: build.query<DataResults, string>({
       query: (id) => `/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Characters', id }],
     }),
   }),
 })
+
+export const { useGetCharacterByIdQuery, useGetCharactersByNameQuery } =
+  charactersApiSlice

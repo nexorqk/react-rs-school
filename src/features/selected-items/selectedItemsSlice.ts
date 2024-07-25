@@ -4,11 +4,9 @@ export interface Item {
   id: string
 }
 
-export interface SelectedItemsState extends Array<Item> {}
-
 const selectedItemsSlice = createSlice({
   name: 'selectedItems',
-  initialState: [] as SelectedItemsState,
+  initialState: [] as Item[],
   reducers: {
     toggleItem: (state, action: PayloadAction<Item>) => {
       const itemIndex = state.findIndex((item) => item.id === action.payload.id)

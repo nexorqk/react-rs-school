@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { expect, it } from 'vitest'
-import NotFound from '../src/views/not-found/NotFound'
+import { NotFound } from '../pages/not-found/NotFound'
 
 it('Not Found page exist', () => {
   render(<NotFound />)

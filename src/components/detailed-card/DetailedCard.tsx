@@ -1,10 +1,9 @@
+import { useGetCharacterByIdQuery } from '../../features/characters/charactersApiSlice'
 import Loader from '../loader/Loader'
 import classes from './DetailedCard.module.css'
-import { charactersApi } from '../../app/services/characters'
 
-export default function DetailedCard({ detailedId }: { detailedId: string }) {
-  const { data, error, isLoading } =
-    charactersApi.useGetCharacterByIdQuery(detailedId)
+export const DetailedCard = ({ detailedId }: { detailedId: string }) => {
+  const { data, error, isLoading } = useGetCharacterByIdQuery(detailedId)
 
   if (error) {
     throw new Error('No Detailed Data')

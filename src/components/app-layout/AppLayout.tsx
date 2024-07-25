@@ -3,12 +3,12 @@ import { createContext, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Search from '../../components/search/Search'
-import { setSearch } from '../../features/search/searchslice'
+import { setSearch } from '../../features/search/searchSlice'
 import classes from './AppLayout.module.css'
 
 export const ThemeContext = createContext('light')
 
-export default function AppLayout() {
+export const AppLayout = () => {
   const dispatch = useAppDispatch()
   const searchState = useAppSelector((state) => state.search)
   const [theme, setTheme] = useState('light')

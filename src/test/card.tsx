@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { expect, it } from 'vitest'
-import Card from '../src/components/card/Card'
+import { Card } from '../components/card/Card'
 
 it('Card component renders the relevant card data', () => {
   const mockData = {
@@ -18,7 +18,7 @@ it('Card component renders the relevant card data', () => {
     name: 'Rick Sanchez',
   }
 
-  render(<Card character={mockData} handleCardClick={() => {}} />)
+  render(<Card character={mockData} handleCardClick={() => '1'} />)
 
   const name = screen.getByRole('heading')
   expect(name).toHaveTextContent('Rick Sanchez')
