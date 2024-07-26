@@ -4,12 +4,13 @@ import { Home } from './pages/home/Home'
 import { NotFound } from './pages/not-found/NotFound'
 
 export const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  )
+    return (
+        <Routes>
+            <Route path="/" element={<AppLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/:id" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
+    )
 }

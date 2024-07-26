@@ -1,21 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export interface SearchState {
-  value: string
+export interface ISearchState {
+    value: string
 }
 
-const initialState: SearchState = {
-  value: '',
+const initialState: ISearchState = {
+    value: '',
 }
 
 export const searchSlice = createSlice({
-  name: 'search',
-  initialState,
-  reducers: {
-    setSearch: (state, action) => {
-      state.value = action.payload
+    name: 'search',
+    initialState,
+    reducers: {
+        setSearch: (state, action) => {
+            localStorage.setItem('searchQuery', action.payload)
+            state.value = action.payload
+        },
     },
-  },
 })
 
 export const { setSearch } = searchSlice.actions
