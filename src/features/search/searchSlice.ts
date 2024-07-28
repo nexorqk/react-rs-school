@@ -13,8 +13,7 @@ export const searchSlice = createSlice({
     initialState,
     reducers: {
         setSearch: (state, action) => {
-            localStorage.setItem('searchQuery', action.payload)
-            state.value = action.payload
+            state.value = action.payload.name
         },
     },
 })

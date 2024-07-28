@@ -1,36 +1,34 @@
-import { Link } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { DataResults } from '../../types'
 import classes from './Card.module.css'
 
-export const Card = ({
-    character,
-    handleCardClick,
-}: {
-    character: DataResults
-    handleCardClick: (id: string) => void
-}) => {
+export const Card = ({ character }: { character: DataResults }) => {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const handleURLParams = () => {
+        const query = {
+            page: searchParams.get('page') || '1',
+            details: `${character.id}`,
+        }
+        setSearchParams(query)
+    }
+
     return (
-        <Link
-            className={classes.link}
-            to={`/details=${character.id}`}
+        <ul
             key={character.id}
+            onClick={handleURLParams}
+            className={classes.card}
         >
-            <ul
-                className={classes.card}
-                onClick={() => handleCardClick(`${character.id}`)}
-            >
-                <li>
-                    <h3 className={classes.name}>{character.name}</h3>
-                </li>
-                <li>{character.gender} - Gender</li>
-                <li className={classes.imageItem}>
-                    <img
-                        className={classes.image}
-                        src={character.image}
-                        alt={character.name}
-                    />
-                </li>
-            </ul>
-        </Link>
+            <li>
+                <h3 className={classes.name}>{character.name}</h3>
+            </li>
+            <li>{character.gender} - Gender</li>
+            <li className={classes.imageItem}>
+                <img
+                    className={classes.image}
+                    src={character.image}
+                    alt={character.name}
+                />
+            </li>
+        </ul>
     )
 }

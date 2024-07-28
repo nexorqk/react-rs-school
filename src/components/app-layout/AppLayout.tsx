@@ -1,23 +1,29 @@
 import clsx from 'clsx'
 import { createContext, useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import { useAppDispatch } from '../../app/hooks'
+import { Link, Outlet } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Search from '../../components/search/Search'
 import { setSearch } from '../../features/search/searchSlice'
 import classes from './AppLayout.module.css'
 
-export const ThemeContext = createContext('light')
+export const ThemeContext = createContext('')
 
 export const AppLayout = () => {
     const dispatch = useAppDispatch()
-    const [theme, setTheme] = useState('light')
+    const searchState = useAppSelector((state) => state.search)
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
     const [searchValue, setSearchValue] = useState(
-        localStorage.getItem('searchQuery') || ''
+        localStorage.getItem('searchValue') || ''
     )
 
     useEffect(() => {
-        dispatch(setSearch(searchValue))
-    }, [dispatch, searchValue])
+        dispatch(setSearch({ name: searchValue }))
+        localStorage.setItem('searchValue', searchValue)
+    }, [dispatch, searchValue, searchState])
+
+    useEffect(() => {
+        localStorage.setItem('theme', theme)
+    }, [theme])
 
     return (
         <ThemeContext.Provider value={theme}>
@@ -28,7 +34,9 @@ export const AppLayout = () => {
                 )}
             >
                 <div className={classes.top}>
-                    <h1 className={classes.title}>Rick And Morty Characters</h1>
+                    <h1 className={classes.title}>
+                        <Link to="/">Rick And Morty Characters</Link>
+                    </h1>
                     <Search
                         value={searchValue}
                         setSearchValue={setSearchValue}

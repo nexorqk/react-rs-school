@@ -18,3 +18,7 @@
 .searchItem:hover {
     border-color: lightsalmon;
 }
+
+.searchItem.active {
+    border-color: red;
+}

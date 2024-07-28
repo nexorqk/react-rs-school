@@ -3,6 +3,15 @@
     height: calc(100vh - 77px);
 }
 
+.link {
+    text-decoration: underline;
+    font-size: 1.25rem;
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
 .text {
     text-align: center;
 }

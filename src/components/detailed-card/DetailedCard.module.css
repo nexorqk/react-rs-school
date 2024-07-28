@@ -4,6 +4,19 @@
     margin: 0 auto;
 }
 
+.close {
+    list-style: none;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.closeButton {
+    padding: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .card {
     border: 1px solid black;
     border-radius: 6px;

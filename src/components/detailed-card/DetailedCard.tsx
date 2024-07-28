@@ -1,9 +1,13 @@
+import { useSearchParams } from 'react-router-dom'
 import { useGetCharacterByIdQuery } from '../../features/characters/charactersApiSlice'
 import { Loader } from '../loader/Loader'
 import classes from './DetailedCard.module.css'
 
-export const DetailedCard = ({ detailedId }: { detailedId: string }) => {
-    const { data, error, isLoading } = useGetCharacterByIdQuery(detailedId)
+export const DetailedCard = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const detailId = searchParams.get('details') || '1'
+    const { data, error, isLoading } = useGetCharacterByIdQuery(detailId)
 
     if (error) {
         throw new Error('No Detailed Data')
@@ -14,6 +18,18 @@ export const DetailedCard = ({ detailedId }: { detailedId: string }) => {
             {isLoading && <Loader />}
             {data && (
                 <ul className={classes.card}>
+                    <li className={classes.close}>
+                        <button
+                            className={classes.closeButton}
+                            onClick={() =>
+                                setSearchParams({
+                                    page: searchParams.get('page') || '1',
+                                })
+                            }
+                        >
+                            Close
+                        </button>
+                    </li>
                     <li>Close</li>
                     <li>Name - {data.name}</li>
                     <li>Status - {data.status}</li>
@@ -38,6 +54,7 @@ export const DetailedCard = ({ detailedId }: { detailedId: string }) => {
                     </li>
                 </ul>
             )}
+            {/* TODO Close button */}
         </div>
     )
 }

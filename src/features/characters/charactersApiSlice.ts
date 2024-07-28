@@ -11,7 +11,7 @@ export const charactersApiSlice = createApi({
     endpoints: (build) => ({
         getCharactersByName: build.query<
             DataType,
-            { name: string; page: number }
+            { name: string; page: string }
         >({
             query: ({ name, page }) => `/?page=${page}&name=${name}`,
         }),
