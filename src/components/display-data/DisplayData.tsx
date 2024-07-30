@@ -3,11 +3,13 @@ import { useAppSelector } from '../../app/hooks'
 import { useGetCharactersByNameQuery } from '../../features/characters/charactersApiSlice'
 import { Card } from '../card/Card'
 import { DetailedCard } from '../detailed-card/DetailedCard'
+import { DownloadSelected } from '../download-selected/DownloadSelected'
 import { Loader } from '../loader/Loader'
 import classes from './DisplayData.module.css'
 
 export const DisplayData = () => {
     const searchState = useAppSelector((state) => state.search)
+    const selectedItems = useAppSelector((state) => state.selectedItems)
     const [searchParams] = useSearchParams()
 
     const { data, error, isLoading } = useGetCharactersByNameQuery({
@@ -18,6 +20,7 @@ export const DisplayData = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.cardList}>
+                {selectedItems.length > 0 && <DownloadSelected />}
                 <div className={classes.loaderWrapper}>
                     {isLoading && <Loader />}
                 </div>

@@ -18,7 +18,7 @@ it('Card component renders the relevant card data', () => {
         name: 'Rick Sanchez',
     }
 
-    render(<Card character={mockData} handleCardClick={() => '1'} />)
+    render(<Card character={mockData} />)
 
     const name = screen.getByRole('heading')
     expect(name).toHaveTextContent('Rick Sanchez')

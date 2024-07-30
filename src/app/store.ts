@@ -1,16 +1,14 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { combineSlices, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { counterSlice } from '../features/counter/counterSlice'
-import { quotesApiSlice } from '../features/quotes/quotesApiSlice'
 import { searchSlice } from '../features/search/searchSlice'
 import { charactersApiSlice } from '../features/characters/charactersApiSlice'
+import { selectedItemsSlice } from '../features/selected-items/selectedItemsSlice'
 
 const rootReducer = combineSlices(
-    counterSlice,
-    quotesApiSlice,
     searchSlice,
-    charactersApiSlice
+    charactersApiSlice,
+    selectedItemsSlice
 )
 
 export type RootState = ReturnType<typeof rootReducer>

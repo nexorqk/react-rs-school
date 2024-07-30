@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface Item {
-    id: string
-}
-
-const selectedItemsSlice = createSlice({
+export const selectedItemsSlice = createSlice({
     name: 'selectedItems',
-    initialState: [] as Item[],
+    initialState: [] as number[],
     reducers: {
-        toggleItem: (state, action: PayloadAction<Item>) => {
-            const itemIndex = state.findIndex(
-                (item) => item.id === action.payload.id
-            )
+        toggleItem: (state, action: PayloadAction<number>) => {
+            const itemIndex = state.findIndex((item) => item === action.payload)
             if (itemIndex === -1) {
                 state.push(action.payload)
             } else {
                 state.splice(itemIndex, 1)
             }
+
+            return state
+        },
+        clearSelection: (state) => {
+            state = []
+
+            return state
         },
     },
 })
 
-export const { toggleItem } = selectedItemsSlice.actions
-export const selectedItemsReducer = selectedItemsSlice.reducer
+export const { toggleItem, clearSelection } = selectedItemsSlice.actions

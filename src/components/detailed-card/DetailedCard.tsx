@@ -54,7 +54,6 @@ export const DetailedCard = () => {
                     </li>
                 </ul>
             )}
-            {/* TODO Close button */}
         </div>
     )
 }
