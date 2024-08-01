@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import Search from '../components/search/Search'
+import Search from '../features/search/Search'
 import ErrorBoundary from '../components/error-boundary/ErrrorBoundary'
 
 describe('Search component', () => {

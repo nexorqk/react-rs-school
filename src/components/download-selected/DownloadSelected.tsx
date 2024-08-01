@@ -8,7 +8,7 @@ export const DownloadSelected = () => {
     const dispatch = useAppDispatch()
     const selectedItems = useAppSelector((store) => store.selectedItems)
 
-    const { data, isLoading, isError } =
+    const { data, isLoading, isError, isSuccess } =
         useGetSelectedItemsByIdQuery(selectedItems)
 
     if (isError) {
@@ -30,7 +30,7 @@ export const DownloadSelected = () => {
         return currentDate
     }
 
-    const downloadCSV = (selectedItemsResult: DataResults[] | undefined) => {
+    const downloadCSV = (selectedItemsResult: DataResults[] | DataResults) => {
         const csvRows = []
         const headers = [
             'Name',
@@ -43,7 +43,11 @@ export const DownloadSelected = () => {
 
         csvRows.push(headers.join(','))
 
-        selectedItemsResult?.forEach((character) => {
+        const selectedItemsResultArr = Array.isArray(selectedItemsResult)
+            ? selectedItemsResult
+            : [selectedItemsResult]
+
+        selectedItemsResultArr?.forEach((character) => {
             const row = [
                 character.name,
                 character.status,
@@ -53,7 +57,6 @@ export const DownloadSelected = () => {
                 character.location.name,
             ]
 
-            console.log(row)
             csvRows.push(row.join(','))
         })
 
@@ -87,7 +90,7 @@ export const DownloadSelected = () => {
                 </button>
                 <button
                     className={classes.downloadBtn}
-                    onClick={() => downloadCSV(data)}
+                    onClick={() => (isSuccess ? downloadCSV(data) : null)}
                     disabled={isLoading}
                 >
                     Download

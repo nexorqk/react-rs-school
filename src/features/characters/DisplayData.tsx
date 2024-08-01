@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
-import { useGetCharactersByNameQuery } from '../../features/characters/charactersApiSlice'
-import { Card } from '../card/Card'
-import { DetailedCard } from '../detailed-card/DetailedCard'
-import { DownloadSelected } from '../download-selected/DownloadSelected'
-import { Loader } from '../loader/Loader'
+import { useGetCharactersByNameQuery } from './charactersApiSlice'
+import { Card } from '../../components/card/Card'
+import { DetailedCard } from '../../components/detailed-card/DetailedCard'
+import { DownloadSelected } from '../../components/download-selected/DownloadSelected'
+import { Loader } from '../../components/loader/Loader'
 import classes from './DisplayData.module.css'
 
 export const DisplayData = () => {

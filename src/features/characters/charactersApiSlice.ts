@@ -19,7 +19,10 @@ export const charactersApiSlice = createApi({
             query: (id) => `/${id}`,
             providesTags: (result, error, id) => [{ type: 'Characters', id }],
         }),
-        getSelectedItemsById: build.query<DataResults[], number[]>({
+        getSelectedItemsById: build.query<
+            DataResults[] | DataResults,
+            number[]
+        >({
             query: (idArr) => `${idArr.join(',')}`,
         }),
     }),

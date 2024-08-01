@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { createContext, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import Search from '../../components/search/Search'
+import Search from '../../features/search/Search'
 import { setSearch } from '../../features/search/searchSlice'
 import classes from './AppLayout.module.css'
 

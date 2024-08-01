@@ -1,4 +1,4 @@
-import { DisplayData } from '../../components/display-data/DisplayData'
+import { DisplayData } from '../../features/characters/DisplayData'
 import { Pagination } from '../../components/pagination/Pagination'
 import classes from './Home.module.css'
 
