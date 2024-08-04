@@ -1,117 +1,117 @@
 .text {
-    text-decoration: underline wavy;
+  text-decoration: underline wavy;
 }
 
 .buttons {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .unselectBtn {
-    align-items: center;
-    background-color: #ffe7e7;
-    background-position: 0 0;
-    border: 1px solid #fee0e0;
-    border-radius: 11px;
-    box-sizing: border-box;
-    color: #d33a2c;
-    cursor: pointer;
-    display: flex;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 33.4929px;
-    list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg)
-        none;
-    padding: 2px 12px;
-    text-align: left;
-    text-decoration: none;
-    text-shadow: none;
-    text-underline-offset: 1px;
-    transition:
-        border 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    word-break: break-word;
+  align-items: center;
+  background-color: #ffe7e7;
+  background-position: 0 0;
+  border: 1px solid #fee0e0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #d33a2c;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 33.4929px;
+  list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg)
+    none;
+  padding: 2px 12px;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition:
+    border 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: break-word;
 }
 
 .unselectBtn:active,
 .unselectBtn:hover,
 .unselectBtn:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .unselectBtn:active {
-    background-color: #d33a2c;
-    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
-    color: #ffffff;
+  background-color: #d33a2c;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #ffffff;
 }
 
 .unselectBtn:hover {
-    background-color: #ffe3e3;
-    border-color: #faa4a4;
+  background-color: #ffe3e3;
+  border-color: #faa4a4;
 }
 
 .unselectBtn:active:hover,
 .unselectBtn:focus:hover,
 .unselectBtn:focus {
-    background-color: #d33a2c;
-    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
-    color: #ffffff;
+  background-color: #d33a2c;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #ffffff;
 }
 
 .downloadBtn {
-    appearance: none;
-    backface-visibility: hidden;
-    background-color: #27ae60;
-    border-radius: 8px;
-    border-style: none;
-    box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-family:
-        Inter,
-        -apple-system,
-        system-ui,
-        'Segoe UI',
-        Helvetica,
-        Arial,
-        sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: normal;
-    line-height: 1.5;
-    outline: none;
-    overflow: hidden;
-    padding: 13px 20px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transform: translate3d(0, 0, 0);
-    transition: all 0.3s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: top;
-    white-space: nowrap;
+  appearance: none;
+  backface-visibility: hidden;
+  background-color: #27ae60;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family:
+    Inter,
+    -apple-system,
+    system-ui,
+    'Segoe UI',
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.5;
+  outline: none;
+  overflow: hidden;
+  padding: 13px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
 }
 
 .downloadBtn:hover {
-    background-color: #1e8449;
-    opacity: 1;
-    transform: translateY(0);
-    transition-duration: 0.35s;
+  background-color: #1e8449;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: 0.35s;
 }
 
 .downloadBtn:active {
-    transform: translateY(2px);
-    transition-duration: 0.35s;
+  transform: translateY(2px);
+  transition-duration: 0.35s;
 }
 
 .downloadBtn:hover {
-    box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
+  box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
 }

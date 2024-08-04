@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest'
 import { Loader } from '../components/loader/Loader'
 
 describe('Loader', () => {
-    it('renders the loader element', () => {
-        render(<Loader />)
-        const loaderElement = screen.getByRole('region')
-        expect(loaderElement).toBeInTheDocument()
-    })
+  it('renders the loader element', () => {
+    render(<Loader />)
+    const loaderElement = screen.getByRole('region')
+    expect(loaderElement).toBeInTheDocument()
+  })
 })
