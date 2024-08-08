@@ -3,10 +3,10 @@ import classes from './Search.module.css'
 
 type PropsType = {
   value: string
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>
+  handleSearchInput: (searchValue: string) => void
 }
 
-export default function Search({ value, setSearchValue }: PropsType) {
+export default function Search({ value, handleSearchInput }: PropsType) {
   const [isCustomError, setIsCustomError] = useState(false)
 
   if (isCustomError) {
@@ -31,7 +31,7 @@ export default function Search({ value, setSearchValue }: PropsType) {
           className={classes.search}
           type="search"
           value={value}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => handleSearchInput(e.target.value)}
         />
       </div>
       <button

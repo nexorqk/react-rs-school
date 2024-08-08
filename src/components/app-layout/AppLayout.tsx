@@ -30,6 +30,10 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('theme', theme)
   }, [theme])
 
+  const handleSearchInput = (searchValue: string) => {
+    setSearchValue(searchValue)
+  }
+
   return (
     <ThemeContext.Provider value={theme}>
       <div className={clsx(classes.wrapper, theme === 'dark' && classes.dark)}>
@@ -37,7 +41,7 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
           <h1 className={classes.title}>
             <Link href="/">Rick And Morty Characters</Link>
           </h1>
-          <Search value={searchValue} setSearchValue={setSearchValue} />
+          <Search value={searchValue} handleSearchInput={handleSearchInput} />
 
           <button
             className={classes.toggleTheme}

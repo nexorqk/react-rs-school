@@ -17,7 +17,6 @@ export const Card = ({ character }: { character: DataResults }) => {
     }
     router.push(`?page=${query.page}&details=${query.details}`)
   }
-  const route = useRouter()
 
   const isChecked = selectedItems.includes(character.id)
 
