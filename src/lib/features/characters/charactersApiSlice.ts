@@ -1,6 +1,7 @@
+// 'use client'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { DataResults, DataType } from '../../types'
+import { DataResults, DataType } from '@/types'
 
 export const charactersApiSlice = createApi({
   baseQuery: fetchBaseQuery({

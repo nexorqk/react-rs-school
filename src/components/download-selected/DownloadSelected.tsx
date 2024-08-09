@@ -1,7 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { useGetSelectedItemsByIdQuery } from '../../features/characters/charactersApiSlice'
-import { clearSelection } from '../../features/selected-items/selectedItemsSlice'
-import { DataResults } from '../../types'
+'use client'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { useGetSelectedItemsByIdQuery } from '@/lib/features/characters/charactersApiSlice'
+import { clearSelection } from '@/lib/features/selected-items/selectedItemsSlice'
+import { DataResults } from '@/types'
 import classes from './DownloadSelected.module.css'
 
 export const DownloadSelected = () => {

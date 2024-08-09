@@ -1,6 +1,7 @@
+'use client'
 import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-import { useGetCharacterByIdQuery } from '../../features/characters/charactersApiSlice'
+import { useRouter } from 'next/navigation'
+import { useGetCharacterByIdQuery } from '@/lib/features/characters/charactersApiSlice'
 import { Loader } from '../loader/Loader'
 import classes from './DetailedCard.module.css'
 

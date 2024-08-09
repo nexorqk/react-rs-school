@@ -1,9 +1,9 @@
-import clsx from 'clsx'
+'use client'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useAppSelector } from '../../app/hooks'
-import { useGetCharactersByNameQuery } from '../../features/characters/charactersApiSlice'
+import { useAppSelector } from '@/lib/hooks'
+import { useGetCharactersByNameQuery } from '@/lib/features/characters/charactersApiSlice'
 import classes from './Pagination.module.css'
 
 export const Pagination = () => {
@@ -30,10 +30,10 @@ export const Pagination = () => {
         <Link
           key={pageNum}
           href={`?page=${pageNum}`}
-          className={clsx(
+          className={[
             classes.searchItem,
-            +(searchParams?.get('page') || '1') === pageNum && classes.active
-          )}
+            +(searchParams?.get('page') || '1') === pageNum && classes.active,
+          ].join(' ')}
         >
           {pageNum}
         </Link>

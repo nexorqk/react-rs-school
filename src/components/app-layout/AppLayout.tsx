@@ -1,10 +1,10 @@
-import clsx from 'clsx'
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import Search from '../../features/search/Search'
-import { setSearch } from '../../features/search/searchSlice'
-import classes from './AppLayout.module.css'
+'use client'
+import Search from '@/lib/features/search/Search'
+import { setSearch } from '@/lib/features/search/searchSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import Link from 'next/link'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import classes from './AppLayout.module.css'
 
 export const ThemeContext = createContext<string | null>(null)
 
@@ -36,7 +36,11 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <div className={clsx(classes.wrapper, theme === 'dark' && classes.dark)}>
+      <div
+        className={[classes.wrapper, theme === 'dark' && classes.dark].join(
+          ' '
+        )}
+      >
         <div className={classes.top}>
           <h1 className={classes.title}>
             <Link href="/">Rick And Morty Characters</Link>

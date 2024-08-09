@@ -1,9 +1,10 @@
-import { useRouter } from 'next/router'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { toggleItem } from '../../features/selected-items/selectedItemsSlice'
-import { DataResults } from '../../types'
-import classes from './Card.module.css'
+'use client'
+import { toggleItem } from '@/lib/features/selected-items/selectedItemsSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { DataResults } from '@/types'
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import classes from './Card.module.css'
 
 export const Card = ({ character }: { character: DataResults }) => {
   const dispatch = useAppDispatch()
@@ -25,7 +26,7 @@ export const Card = ({ character }: { character: DataResults }) => {
   }
 
   return (
-    <div key={character.id} className={classes.card}>
+    <div className={classes.card}>
       <input
         className={classes.selectCheckbox}
         type="checkbox"
